@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -37,8 +40,14 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         holder.temperature.setText(weather.getTemperature() + "°c");
         holder.windSpeed.setText(weather.getWindSpeed() + " Km/h");
 
+//        changing the image w.r.t to weather
 
+        Picasso.get().load("http:" + weather.getIcon()).into(holder.conditionImage);
 
+//        changing the date into simple format
+
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+        SimpleDateFormat output = new SimpleDateFormat("hh:mm aa");
 
     }
 
