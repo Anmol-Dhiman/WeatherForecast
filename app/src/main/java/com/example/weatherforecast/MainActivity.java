@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
-
 
         if (checkPermission()) {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
