@@ -41,10 +41,9 @@
         android:layout_marginStart="16dp"
         android:background="@null"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textAutoCorrect|textPersonName|textCapWords"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:text="Jind"
         android:textColor="@color/white"
         android:textSize="22dp"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
@@ -79,13 +78,13 @@
 
     <ImageView
         android:id="@+id/conditionIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temperature"
-        app:srcCompat="@drawable/sample_image" />
+        android:src="@drawable/sample_image"/>
 
     <TextView
         android:id="@+id/condition"
@@ -100,18 +99,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conditionIcon" />
 
+
     <TextView
         android:id="@+id/todayWeatherForecast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Today's Weather Forecast"
         android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -120,8 +119,10 @@
 
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
+
+        android:isScrollContainer="true"
+        android:overScrollMode="never"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
