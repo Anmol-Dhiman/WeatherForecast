@@ -1,4 +1,4 @@
-package com.example.weatherforecast;
+package com.example.weatherforecast.Adapter;
 
 
 import android.content.Context;
@@ -11,21 +11,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import com.example.weatherforecast.R;
+import com.example.weatherforecast.Repository.WeatherModel;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
+import java.util.List;
 
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<WeatherModle> weatherDataArrayList;
+    private List<WeatherModel> weatherDataArrayList;
 
-    public WeatherAdapter(Context context, ArrayList<WeatherModle> weatherDataArrayList) {
+    public WeatherAdapter(Context context) {
         this.context = context;
-        this.weatherDataArrayList = weatherDataArrayList;
     }
 
     @NonNull
@@ -38,16 +43,19 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        WeatherModle weather = weatherDataArrayList.get(position);
+        WeatherModel weather = weatherDataArrayList.get(position);
         holder.temperature.setText(weather.getTemperature() + "°c");
         holder.windSpeed.setText(weather.getWindSpeed() + " Km/h");
 
-//        changing the image w.r.t to weather
 
-        Picasso.get().load("https:" + weather.getIcon()).into(holder.conditionImage);
+//        changing the image w.r.t to weather
+        Glide.with(context)
+                .load(this.weatherDataArrayList.get(position).getIcon())
+                .apply(RequestOptions.centerCropTransform())
+                .into(holder.conditionImage);
+
 
 //        changing the date into simple format
-
         SimpleDateFormat input = new SimpleDateFormat("yyyy-mm-dd hh:mm");
         SimpleDateFormat output = new SimpleDateFormat("hh:mm aa");
         try {
@@ -63,7 +71,15 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return weatherDataArrayList.size();
+        if (this.weatherDataArrayList != null) {
+            return this.weatherDataArrayList.size();
+        }
+        return 0;
+    }
+
+    public void setMovieList(List<WeatherModel> list) {
+        weatherDataArrayList = list;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
